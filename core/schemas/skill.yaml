@@ -1,8 +1,8 @@
 "$schema": "http://json-schema.org/draft-07/schema#"
-"$id": "https://raw.githubusercontent.com/bwgabor/agent-prompt-framework/main/core/schemas/skill.yaml"
+"$id": "https://raw.githubusercontent.com/bwgabor/platform-prompt-framework/main/core/schemas/skill.yaml"
 title: Skill
 description: >
-  Front matter schema for a `skill` component (core/skills/**/*.md).
+  Front matter schema for a `skill` component (core/source/skills/**/*.md).
   A skill defines a repeatable process or capability - the "how", not the
   "who" (persona) and not the presentation (output-template). See
   core/conventions/skill.md.

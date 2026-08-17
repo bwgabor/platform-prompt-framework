@@ -1,8 +1,8 @@
 "$schema": "http://json-schema.org/draft-07/schema#"
-"$id": "https://raw.githubusercontent.com/bwgabor/agent-prompt-framework/main/core/schemas/shared-block.yaml"
+"$id": "https://raw.githubusercontent.com/bwgabor/platform-prompt-framework/main/core/schemas/shared-block.yaml"
 title: Shared Block
 description: >
-  Front matter schema for a `shared-block` component (core/shared-blocks/**/*.md).
+  Front matter schema for a `shared-block` component (core/source/shared-blocks/**/*.md).
   A shared block is a short, reusable instruction fragment that can be inserted
   into any assembled prompt, regardless of persona or skill. See
   core/conventions/shared-blocks.md.

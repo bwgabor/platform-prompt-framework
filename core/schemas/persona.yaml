@@ -1,8 +1,8 @@
 "$schema": "http://json-schema.org/draft-07/schema#"
-"$id": "https://raw.githubusercontent.com/bwgabor/agent-prompt-framework/main/core/schemas/persona.yaml"
+"$id": "https://raw.githubusercontent.com/bwgabor/platform-prompt-framework/main/core/schemas/persona.yaml"
 title: Persona
 description: >
-  Front matter schema for a `persona` component (core/personas/**/*.md).
+  Front matter schema for a `persona` component (core/source/personas/**/*.md).
   A persona defines the persistent identity of an agent - role, expertise
   scope, voice, and behavioural principles. See core/conventions/persona.md.
 type: object

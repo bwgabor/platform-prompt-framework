@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/bwgabor/agent-prompt-framework/main/blueprint.schema.json",
+  "$id": "https://raw.githubusercontent.com/bwgabor/platform-prompt-framework/main/blueprint.schema.json",
   "title": "Platform Blueprint",
   "description": "Schema for platforms/<platform>/blueprint.yaml. Declares which core/ components a platform uses. Whether a component is used as-is from core/ or overridden is not declared here - it is decided at build/assembly time purely by file presence: if platforms/<platform>/<type>/<name>.md exists, it takes precedence over the core/ version of the same name (see ARCHITECTURE.md Override logic). This keeps the blueprint from drifting out of sync with the actual override files on disk.",
   "type": "object",
@@ -35,7 +35,7 @@
     },
     "outputs": {
       "type": "object",
-      "description": "Optional. Merges components into shared artifact files, for platforms whose slots don't match the default one-file-per-component layout (e.g. a platform with no separate skill slot, or one that needs the same component repeated across several files). Keys are arbitrary target artifact names (e.g. general-instructions, skills, my-project-instructions). Values are lists of `type:name` references, where `type` is one of personas/skills/shared-blocks/output-templates and `name` must already be declared under the matching list in `components`. A component referenced here is merged into every listed output file instead of getting its own default file; the same reference may appear under multiple output keys (duplication is allowed, not an error) if it needs to be repeated. Any component NOT referenced anywhere in `outputs` keeps the default behavior: its own file named after it. `outputs` never contains literal prompt text - only references to components defined in core/ or platforms/<platform>/.",
+      "description": "Optional. Merges components into shared artifact files, for platforms whose slots don't match the default one-file-per-component layout (e.g. a platform with no separate skill slot, or one that needs the same component repeated across several files). Keys are arbitrary target artifact names (e.g. general-instructions, skills, my-project-instructions). Values are lists of `type:name` references, where `type` is one of personas/skills/shared-blocks/output-templates and `name` must already be declared under the matching list in `components`. A component referenced here is merged into every listed output file instead of getting its own default file; the same reference may appear under multiple output keys (duplication is allowed, not an error) if it needs to be repeated. Any component NOT referenced anywhere in `outputs` keeps the default behavior: its own file named after it. `outputs` never contains literal prompt text - only references to components defined in core/source/ or platforms/<platform>/.",
       "additionalProperties": {
         "type": "array",
         "items": {
@@ -50,7 +50,7 @@
   "definitions": {
     "componentNameList": {
       "type": "array",
-      "description": "Names of components of this type used by the platform. Default resolution at assembly time (when NOT referenced in `outputs`): each component gets its own file, using platforms/<platform>/<type>/<name>.md if it exists, otherwise core/<type>/<name>.md.",
+      "description": "Names of components of this type used by the platform. Default resolution at assembly time (when NOT referenced in `outputs`): each component gets its own file, using platforms/<platform>/<type>/<name>.md if it exists, otherwise core/source/<type>/<name>.md.",
       "items": {
         "type": "string"
       }

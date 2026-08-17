@@ -4,7 +4,12 @@ Short-form record of the key architectural decisions behind the platform-configu
  
 ## core/ + platforms/ separation
  
-Shared components (personas, skills, shared-blocks, conventions, schemas) are defined once in `core/`. Each platform only stores its overrides in `platforms/<platform>/`.
+Shared components are defined once in `core/`. Each platform only stores its overrides in `platforms/<platform>/`.
+
+`core/` has three distinct areas:
+- `core/source/` — blueprint-referenced components (personas, skills, shared-blocks, outputs). These are the live files a platform actually assembles from. Edit these when you want to change a component.
+- `core/conventions/` — human-readable authoring guidelines (Markdown). Not assembled, not referenced by blueprints.
+- `core/schemas/` — machine-readable YAML schemas for validation and IDE autocomplete. Not assembled, not referenced by blueprints.
  
 ## Blueprint YAML
  
@@ -21,7 +26,7 @@ The `tests/` folder holds generated example outputs used to validate the framewo
  
 ## Override logic
  
-If `platforms/<platform>/<component-type>/X.md` exists, it takes precedence over the `core/` version of the same file.
+If `platforms/<platform>/<component-type>/X.md` exists, it takes precedence over the `core/source/<component-type>/X.md` version of the same file.
  
 ## Output assembly (components vs. outputs)
  
@@ -30,4 +35,4 @@ If `platforms/<platform>/<component-type>/X.md` exists, it takes precedence over
 - Default: every component gets its own file, named after it.
 - If a component is referenced under an `outputs` key, it is merged into that target file instead of getting its own default file.
 - The same component may be referenced under more than one `outputs` key - this is intentional repetition (e.g. the same skill copied into two ChatGPT project instruction files), not an error.
-- `outputs` never contains literal prompt text, only `type:name` references to components already declared in `components` - this keeps all actual prompt content inside `core/` and `platforms/<platform>/`, never inside the blueprint itself.
+- `outputs` never contains literal prompt text, only `type:name` references to components already declared in `components` - this keeps all actual prompt content inside `core/source/` and `platforms/<platform>/`, never inside the blueprint itself.

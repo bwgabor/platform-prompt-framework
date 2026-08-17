@@ -22,6 +22,13 @@ components:
     - idea-list
     - persona-sheet
     - project-datasheet
+  
+outputs:
+  general-instructions:
+    - personas:structured-thinkerer
+  project-instructions:
+    - personas:career-coach
+    - shared-blocks:concise-structured-response
 
 # No `outputs` section: Claude natively supports one file per component
 # (a persona -> project instructions, each skill -> its own Skill file),
