@@ -1,2 +1,7 @@
 tmp/*
 !tmp/.gitkeep
+
+# Generated build artifacts
+platforms/*/dist/
+
+scripts/__pycache__/

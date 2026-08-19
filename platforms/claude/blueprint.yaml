@@ -7,12 +7,11 @@ version: "1.0"
 components:
   personas:
     - career-coach
-    - persona-architect
+    - structured-thinker
 
   skills:
-    - brainstorming-session
+    - brainstorming
     - ideation
-    - framework-builder   # overridden for Claude — see platforms/claude/skills/framework-builder.md
 
   shared-blocks:
     - concise-structured-response
@@ -20,16 +19,12 @@ components:
 
   output-templates:
     - idea-list
-    - persona-sheet
     - project-datasheet
   
 outputs:
   general-instructions:
-    - personas:structured-thinkerer
-  project-instructions:
     - personas:career-coach
+    - shared-blocks:questioning
+  project-instructions:
+    - personas:structured-thinker
     - shared-blocks:concise-structured-response
-
-# No `outputs` section: Claude natively supports one file per component
-# (a persona -> project instructions, each skill -> its own Skill file),
-# so the default one-file-per-component layout is used as-is.
