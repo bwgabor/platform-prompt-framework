@@ -31,7 +31,8 @@ platform-prompt-framework/
 ├── templates/               # Starter files (non-schema-based only)
 │   └── blueprint.yaml.template
 ├── scripts/                 # Developer utilities
-│   └── generate_template.py # Generates component .md starters from core/schemas/
+│   ├── generate_template.py # Generates component .md starters from core/schemas/
+│   └── build.py             # Assembles platform prompt files from blueprint.yaml
 └── tests/                   # Generated example outputs, used to validate the framework
 ```
 
@@ -48,6 +49,28 @@ Each platform has exactly one `platforms/<platform>/blueprint.yaml`. It lists, u
 **Output assembly:** by default every component gets its own output file. If a platform's prompt slots don't line up 1:1 with components (e.g. no separate skill slot, or the same content needs to land in two files), the blueprint's optional `outputs` section maps target file names to lists of `type:name` references. See `ARCHITECTURE.md` ("Output assembly") for the full rules - in short, `outputs` only ever contains references, never literal prompt text.
 
 Every `blueprint.yaml` validates against `blueprint.schema.json`.
+
+## Assembling platform prompt files
+
+`scripts/build.py` reads a platform's `blueprint.yaml` and writes the ready-to-use prompt files to `platforms/<platform>/dist/` (excluded from git).
+
+```bash
+# Build a platform
+python scripts/build.py --platform claude
+
+# Custom output directory
+python scripts/build.py --platform claude --output-dir platforms/claude/dist
+
+# Validate blueprint before building
+python scripts/build.py --platform claude --validate
+
+# Add --- separators between components in multi-component files
+python scripts/build.py --platform claude --separator=hr
+```
+
+**Requires:** `pip install pyyaml` (and `jsonschema` for `--validate`).
+
+Override logic: if `platforms/<platform>/<type>/<name>.md` exists it takes precedence over `core/source/<type>/<name>.md`. The build report marks overridden components with `[override]`.
 
 ## Adding a new platform
 
@@ -80,6 +103,6 @@ Every `blueprint.yaml` validates against `blueprint.schema.json`.
 ## What's NOT in this version
 
 - ChatGPT, Perplexity, Gemini, Copilot, Grok, Manus platform configurations (folders exist as placeholders; content comes in a later round)
-- A build/assembly tool that turns a blueprint into finished prompt files (currently manual)
+- ~~A build/assembly tool that turns a blueprint into finished prompt files~~ → done: `scripts/build.py`
 - Automated validation or a CI pipeline
 - A large persona/skill example catalog
